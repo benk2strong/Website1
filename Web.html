@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chris Giron</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --text: #1a1a18;
+      --muted: #7a7a72;
+      --accent: #2a5a3b;
+      --border: #e5e3de;
+      --link: #2a5a3b;
+      --toggle-bg: #e5e3de;
+    }
+
+    [data-theme="dark"] {
+      --bg: #111110;
+      --text: #e8e6e1;
+      --muted: #6b6b63;
+      --accent: #5a9a72;
+      --border: #2a2a28;
+      --link: #5a9a72;
+      --toggle-bg: #2a2a28;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    a:hover { border-bottom-color: var(--link); }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      padding: 36px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-name {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      border-bottom: none;
+    }
+    .nav-name:hover { border-bottom: none; }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--text); border-bottom-color: transparent; }
+    .nav-links a.active { color: var(--text); }
+
+    /* ── Sections ── */
+    section {
+      padding: 72px 0 0;
+      display: none;
+    }
+    section.active { display: block; }
+    section:last-of-type { padding-bottom: 96px; }
+
+    /* ── Hero ── */
+    #overview {
+      padding-top: 64px;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 28px;
+      color: var(--text);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-body {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 300;
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+
+    .hero-body p + p { margin-top: 16px; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── Quick facts ── */
+    .quick-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .fact {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .fact:nth-child(odd) { padding-right: 24px; border-right: 1px solid var(--border); }
+    .fact:nth-child(even) { padding-left: 24px; }
+
+    .fact-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .fact-value {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    /* ── Work / Projects ── */
+    .work-item {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .work-item:first-child { border-top: 1px solid var(--border); }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .work-title {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .work-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .work-org {
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+
+    .work-desc {
+      font-size: 0.92rem;
+      color: #444;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* ── Blog ── */
+    .post-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .post-item:first-child { border-top: 1px solid var(--border); }
+
+    .post-title {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .post-title:hover { color: var(--accent); }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      font-weight: 300;
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-row:first-child { border-top: 1px solid var(--border); }
+
+    .contact-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-value {
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 48px 0 36px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      background: var(--toggle-bg);
+      border: none;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--muted);
+      transition: background 0.2s, color 0.2s;
+    }
+    .theme-toggle:hover { color: var(--text); }
+    .theme-toggle svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ── LinkedIn icon ── */
+    .footer-links { display: flex; align-items: center; gap: 16px; }
+    .linkedin-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-bottom: none !important;
+      transition: color 0.15s;
+    }
+    .linkedin-link:hover { color: var(--accent); border-bottom: none !important; }
+    .linkedin-link svg { width: 14px; height: 14px; }
+    /* ── Life / Shelf ── */
+    .shelf {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    .shelf-col {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .shelf-col:nth-child(odd) { padding-right: 28px; border-right: 1px solid var(--border); }
+    .shelf-col:nth-child(even) { padding-left: 28px; }
+
+    .shelf-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .shelf-list {
+      list-style: none;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ── Photos ── */
+    .photos-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .photos-title {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 2px;
+    }
+    .photos-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .upload-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .upload-btn:hover { background: var(--accent); color: var(--bg); }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .photo-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+    .photo-item:hover img { transform: scale(1.04); }
+
+    .photo-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 56px 24px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img {
+      max-width: 88vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+    .lightbox-close:hover { color: #fff; }
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 2.5rem;
+      cursor: pointer;
+      padding: 12px;
+      line-height: 1;
+    }
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+    .lightbox-delete {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      border-radius: 20px;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+    .lightbox-delete:hover { background: rgba(255,80,80,0.2); border-color: rgba(255,80,80,0.5); color: #ff8080; }
+
+    @media (max-width: 480px) {
+      .shelf { grid-template-columns: 1fr; }
+      .shelf-col:nth-child(odd) { padding-right: 0; border-right: none; }
+      .shelf-col:nth-child(even) { padding-left: 0; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    section.active > * {
+      animation: fadeUp 0.35s ease both;
+    }
+    section.active > *:nth-child(2) { animation-delay: 0.05s; }
+    section.active > *:nth-child(3) { animation-delay: 0.10s; }
+    section.active > *:nth-child(4) { animation-delay: 0.15s; }
+
+    @media (max-width: 480px) {
+      .quick-facts { grid-template-columns: 1fr; }
+      .fact:nth-child(odd) { padding-right: 0; border-right: none; }
+      .fact:nth-child(even) { padding-left: 0; }
+      nav { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a class="nav-name" href="#" onclick="showSection('overview')">Chris Giron</a>
+      <div style="display:flex;align-items:center;gap:24px;">
+        <ul class="nav-links">
+          <li><a href="#" onclick="showSection('overview')" id="nav-overview" class="active">Overview</a></li>
+          <li><a href="#" onclick="showSection('work')" id="nav-work">Work</a></li>
+          <li><a href="#" onclick="showSection('blog')" id="nav-blog">Notes</a></li>
+          <li><a href="#" onclick="showSection('life')" id="nav-life">Life</a></li>
+          <li><a href="#" onclick="showSection('contact')" id="nav-contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg id="toggleIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="active">
+      <div class="hero-label">Growth Equity Investor</div>
+      <h1 class="hero-title">Hi, I'm Chris Giron —<br><em>I back great companies</em><br>at inflection points.</h1>
+      <div class="hero-body">
+        <p>I'm a growth equity investor focused on technology, specifically B2B SaaS and internet companies. I work with businesses at critical inflection points — where the fundamentals are proven and the question becomes: how far can this go?</p>
+        <p>Beyond institutional investing, I make personal investments into founders and ideas I believe in. Most recently, I backed <a href="https://www.asanocafe.com" target="_blank">Asano</a>, a café in New York City.</p>
+        <p>I'm based in New York.</p>
+      </div>
+      <hr class="divider">
+      <div class="quick-facts">
+        <div class="fact">
+          <div class="fact-label">Focus</div>
+          <div class="fact-value">B2B SaaS & Internet</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Stage</div>
+          <div class="fact-value">Growth Equity</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Location</div>
+          <div class="fact-value">New York City</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Angel</div>
+          <div class="fact-value">Asano Café, NYC</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <h2 class="section-heading">Work</h2>
+      <p class="section-sub">Experience in growth equity and technology investing.</p>
+
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">Growth Equity Investor</span>
+          <span class="work-tag">Current</span>
+        </div>
+        <div class="work-org">Technology — B2B SaaS & Internet</div>
+        <p class="work-desc">Evaluating and supporting growth-stage technology companies. Focus areas include B2B SaaS businesses with strong unit economics, durable net revenue retention, and large addressable markets, as well as internet companies at category-defining moments.</p>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">Angel Investor — Asano</span>
+          <span class="work-tag">Personal</span>
+        </div>
+        <div class="work-org">New York City · Hospitality</div>
+        <p class="work-desc">Personal investment into <a href="https://www.asanocafe.com" target="_blank">Asano</a>, a café in New York City. I look for founders building things with genuine craft and a clear point of view — Asano is exactly that.</p>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-title">Technology Sector Coverage</span>
+          <span class="work-tag">Ongoing</span>
+        </div>
+        <div class="work-org">Software, SaaS, Internet</div>
+        <p class="work-desc">Deep coverage of the technology landscape including cloud infrastructure, vertical SaaS, marketplace models, and AI-native software businesses. Tracking how secular tailwinds in software are reshaping enterprise spend and go-to-market motions.</p>
+      </div>
+    </section>
+
+    <!-- BLOG / NOTES -->
+    <section id="blog">
+      <h2 class="section-heading">Notes</h2>
+      <p class="section-sub">Occasional writing on investing, technology, and things I'm thinking about.</p>
+
+      <div class="post-item">
+        <span class="post-title">On the durability of great SaaS businesses</span>
+        <span class="post-date">Coming soon</span>
+      </div>
+      <div class="post-item">
+        <span class="post-title">What B2B growth looks like at inflection points</span>
+        <span class="post-date">Coming soon</span>
+      </div>
+      <div class="post-item">
+        <span class="post-title">Why I invested in a café</span>
+        <span class="post-date">Coming soon</span>
+      </div>
+    </section>
+
+    <!-- LIFE / PERSONAL -->
+    <section id="life">
+      <h2 class="section-heading">Life</h2>
+      <p class="section-sub">Things I'm reading, doing, eating, and thinking about — beyond work.</p>
+
+      <!-- Currently shelf -->
+      <div class="shelf">
+        <div class="shelf-col">
+          <div class="shelf-label">Reading</div>
+          <ul class="shelf-list">
+            <li>The Snowball — Alice Schroeder</li>
+            <li>Poor Charlie's Almanack</li>
+          </ul>
+        </div>
+        <div class="shelf-col">
+          <div class="shelf-label">Eating</div>
+          <ul class="shelf-list">
+            <li><a href="https://www.asanocafe.com" target="_blank">Asano</a> (obviously)</li>
+            <li>Whatever's good in Lower East Side</li>
+          </ul>
+        </div>
+        <div class="shelf-col">
+          <div class="shelf-label">Thinking about</div>
+          <ul class="shelf-list">
+            <li>AI-native SaaS distribution</li>
+            <li>What great hospitality looks like</li>
+          </ul>
+        </div>
+        <div class="shelf-col">
+          <div class="shelf-label">Listening to</div>
+          <ul class="shelf-list">
+            <li>Invest Like the Best</li>
+            <li>Acquired</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Photo section -->
+      <div class="photos-header">
+        <div>
+          <div class="photos-title">Photos</div>
+          <div class="photos-sub">Places, people, and moments.</div>
+        </div>
+        <label class="upload-btn" for="photoUpload">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add photo
+        </label>
+        <input type="file" id="photoUpload" accept="image/*" multiple style="display:none">
+      </div>
+
+      <div class="photo-grid" id="photoGrid">
+        <div class="photo-empty" id="photoEmpty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Click "Add photo" to upload your first photo</span>
+        </div>
+      </div>
+
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+        <button class="lightbox-delete" id="lightboxDelete">Remove photo</button>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-heading">Contact</h2>
+      <p class="section-sub">I'm always open to meeting interesting people and hearing about compelling businesses.</p>
+
+      <div class="contact-grid">
+        <div class="contact-row">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value"><a href="https://www.linkedin.com/in/chris-s-giron/" target="_blank">chris-s-giron</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">Website</span>
+          <span class="contact-value">chris.giron.com</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">Based in</span>
+          <span class="contact-value">New York City</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Chris Giron</span>
+      <div class="footer-links">
+        <a class="linkedin-link" href="https://www.linkedin.com/in/chris-s-giron/" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <span>New York City</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('nav-' + id).classList.add('active');
+      // re-trigger animation
+      const sec = document.getElementById(id);
+      sec.classList.remove('active');
+      void sec.offsetWidth;
+      sec.classList.add('active');
+    }
+
+    // prevent default on nav links
+    document.querySelectorAll('.nav-links a, .nav-name').forEach(a => {
+      a.addEventListener('click', e => e.preventDefault());
+    });
+
+    // ── Photo gallery ──
+    let photos = JSON.parse(localStorage.getItem('cg_photos') || '[]');
+    let lightboxIndex = 0;
+
+    const grid = document.getElementById('photoGrid');
+    const empty = document.getElementById('photoEmpty');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+
+    function savePhotos() {
+      try { localStorage.setItem('cg_photos', JSON.stringify(photos)); } catch(e) {}
+    }
+
+    function renderGrid() {
+      // remove all photo-items
+      document.querySelectorAll('.photo-item').forEach(el => el.remove());
+      if (photos.length === 0) {
+        empty.style.display = 'flex';
+      } else {
+        empty.style.display = 'none';
+        photos.forEach((src, i) => {
+          const div = document.createElement('div');
+          div.className = 'photo-item';
+          div.innerHTML = `<img src="${src}" alt="Photo ${i+1}">`;
+          div.addEventListener('click', () => openLightbox(i));
+          grid.appendChild(div);
+        });
+      }
+    }
+
+    function openLightbox(i) {
+      lightboxIndex = i;
+      lbImg.src = photos[i];
+      lightbox.classList.add('open');
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+    document.getElementById('lightboxPrev').addEventListener('click', () => {
+      lightboxIndex = (lightboxIndex - 1 + photos.length) % photos.length;
+      lbImg.src = photos[lightboxIndex];
+    });
+    document.getElementById('lightboxNext').addEventListener('click', () => {
+      lightboxIndex = (lightboxIndex + 1) % photos.length;
+      lbImg.src = photos[lightboxIndex];
+    });
+    document.getElementById('lightboxDelete').addEventListener('click', () => {
+      if (!confirm('Remove this photo?')) return;
+      photos.splice(lightboxIndex, 1);
+      savePhotos();
+      lightbox.classList.remove('open');
+      renderGrid();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
+      if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
+      if (e.key === 'Escape') lightbox.classList.remove('open');
+    });
+
+    document.getElementById('photoUpload').addEventListener('change', function() {
+      const files = Array.from(this.files);
+      let loaded = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          photos.push(e.target.result);
+          loaded++;
+          if (loaded === files.length) { savePhotos(); renderGrid(); }
+        };
+        reader.readAsDataURL(file);
+      });
+      this.value = '';
+    });
+
+    renderGrid();
+
+    // Dark mode toggle
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('toggleIcon');
+    const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+    const sunSVG = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+
+    let dark = false;
+    toggle.addEventListener('click', () => {
+      dark = !dark;
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      icon.innerHTML = dark ? moonSVG : sunSVG;
+    });
+  </script>
+</body>
+</html>

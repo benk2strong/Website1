@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── Tokens ── */
     :root {
       --bg: #faf9f7;
       --text: #1a1a18;
@@ -28,13 +27,9 @@
       --toggle-bg: #4a4a54;
     }
 
-    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      overflow-y: scroll;
-    }
+    html { scroll-behavior: smooth; overflow-y: scroll; }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -54,14 +49,12 @@
     }
     a:hover { border-bottom-color: var(--link); }
 
-    /* ── Layout ── */
     .container {
       max-width: 640px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* ── Nav ── */
     nav {
       padding: 36px 0 0;
       display: flex;
@@ -73,7 +66,6 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      text-decoration: none;
     }
     .nav-avatar {
       width: 26px;
@@ -115,7 +107,6 @@
     }
     section.active { display: block; }
 
-    /* ── Hero ── */
     .hero-label {
       font-size: 0.75rem;
       font-weight: 500;
@@ -142,14 +133,12 @@
     }
     .hero-body p + p { margin-top: 16px; }
 
-    /* ── Divider ── */
     .divider {
       border: none;
       border-top: 1px solid var(--border);
       margin: 48px 0;
     }
 
-    /* ── Quick facts ── */
     .quick-facts {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -170,7 +159,6 @@
     }
     .fact-value { font-size: 0.9rem; color: var(--text); }
 
-    /* ── Section headings ── */
     .section-heading {
       font-family: 'Lora', serif;
       font-size: 1.5rem;
@@ -185,7 +173,6 @@
       margin-bottom: 40px;
     }
 
-    /* ── Work ── */
     .work-item {
       padding: 32px 0;
       border-bottom: 1px solid var(--border);
@@ -225,7 +212,6 @@
       line-height: 1.65;
     }
 
-    /* ── Notes ── */
     .post-item {
       padding: 28px 0;
       border-bottom: 1px solid var(--border);
@@ -248,7 +234,6 @@
       font-weight: 300;
     }
 
-    /* ── Life shelf ── */
     .shelf {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -276,7 +261,6 @@
       line-height: 1.8;
     }
 
-    /* ── Photos ── */
     .photos-header {
       display: flex;
       align-items: flex-start;
@@ -343,7 +327,6 @@
       text-align: center;
     }
 
-    /* ── Lightbox ── */
     .lightbox {
       display: none;
       position: fixed;
@@ -378,7 +361,6 @@
     }
     .lb-delete:hover { background: rgba(255,80,80,0.2); border-color: rgba(255,80,80,0.5); color: #ff8080; }
 
-    /* ── Contact ── */
     .contact-row {
       display: flex;
       align-items: center;
@@ -396,7 +378,6 @@
     }
     .contact-value { font-size: 0.92rem; color: var(--text); }
 
-    /* ── Footer ── */
     footer {
       padding: 48px 0 36px;
       font-size: 0.78rem;
@@ -407,16 +388,15 @@
       margin-top: 24px;
     }
     .footer-links { display: flex; align-items: center; gap: 16px; }
-    .linkedin-link {
+    .footer-icon-link {
       display: flex; align-items: center; gap: 6px;
       font-size: 0.78rem; color: var(--muted);
       border-bottom: none !important;
       transition: color 0.15s;
     }
-    .linkedin-link:hover { color: var(--accent); }
-    .linkedin-link svg { width: 14px; height: 14px; }
+    .footer-icon-link:hover { color: var(--accent); }
+    .footer-icon-link svg { width: 14px; height: 14px; }
 
-    /* ── Theme toggle ── */
     .theme-toggle {
       background: var(--toggle-bg);
       border: none; cursor: pointer;
@@ -429,7 +409,6 @@
     .theme-toggle:hover { color: var(--text); }
     .theme-toggle svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-    /* ── Animations ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -439,7 +418,6 @@
     section.active > *:nth-child(3) { animation-delay: 0.08s; }
     section.active > *:nth-child(4) { animation-delay: 0.12s; }
 
-    /* ── Mobile ── */
     @media (max-width: 540px) {
       .quick-facts, .shelf { grid-template-columns: 1fr; }
       .fact:nth-child(odd), .shelf-col:nth-child(odd) { padding-right: 0; border-right: none; }
@@ -455,7 +433,7 @@
   <!-- NAV -->
   <nav>
     <span class="nav-name-wrap" onclick="show('overview')">
-      <img class="nav-avatar" src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAL6AnYDASIAAhEBAxEB/8QAHQAAAAcBAQEAAAAAAAAAAAAAAAECAwQFBgcICf/EAFgQAAIBAwMCBAQDBQQHBQQBFQECAwAEEQUSIQYxEyJBUQcyYXEUgZEVI0KhsTNSwdEIJDdicrTxFnWz4fAlJ0N2U4KSo7IZKWw2E7aRlbmVPToH" alt="Chris Giron">
+      <img class="nav-avatar" src="avatar.jpg" alt="Chris Giron">
       <span class="nav-name">Chris Giron</span>
     </span>
     <div style="display:flex;align-items:center;gap:20px;">
@@ -481,10 +459,10 @@
   <!-- OVERVIEW -->
   <section id="overview" class="active">
     <div class="hero-label">Growth Equity Investor</div>
-    <h1 class="hero-title">Hi, I'm Chris Giron —<br><em>I back visionary founders </em><br> with unique ideas at key growth inflection points.</h1>
+    <h1 class="hero-title">Hi, I'm Chris Giron —<br><em>I back visionary founders</em><br>with unique ideas at key growth inflection points.</h1>
     <div class="hero-body">
-      <p>Historically, I've focused on the B2B SaaS and consumer internet companies such as Quilt Software, Life360 and Pinterest. I work with businesses at critical moments, where the fundamentals are proven and the question becomes: What's next?</p>
-      <p>Beyond my work as an institutional investor, I make personal investments into founders and ideas I believe in. Most recently, I backed <a href="https://www.asanocafe.com" target="_blank">Asano</a>, a café in New York City with a unique concept focused on japanese Mottenai.</p>
+      <p>Historically, I've focused on B2B SaaS and consumer internet companies such as Quilt Software, Life360 and Pinterest. I work with businesses at critical moments, where the fundamentals are proven and the question becomes: What's next?</p>
+      <p>Beyond my work as an institutional investor, I make personal investments into founders and ideas I believe in. Most recently, I backed <a href="https://www.asanocafe.com" target="_blank">Asano</a>, a café in New York City with a unique concept focused on Japanese Mottainai.</p>
       <p>I'm based in New York.</p>
     </div>
     <hr class="divider">
@@ -503,20 +481,20 @@
 
     <div class="work-item">
       <div class="work-header"><span class="work-title">Growth Equity Investor</span><span class="work-tag">Current</span></div>
-      <div class="work-org">Private Equity — B2B Software</div>
+      <div class="work-org">Technology — B2B SaaS & Internet</div>
       <p class="work-desc">I evaluate and underwrite growth-stage software businesses navigating transformational growth, combining rigorous financial modeling with hands-on commercial diligence. My work spans new deal evaluation, portfolio company support — including go-to-market strategy, working with management teams, and operational development — and seeing where growth can be created.</p>
     </div>
 
     <div class="work-item">
       <div class="work-header"><span class="work-title">Angel Investor — Asano</span><span class="work-tag">Personal</span></div>
       <div class="work-org">Consumer — Food & Beverage</div>
-      <p class="work-desc">Personal investment into <a href="https://www.asanocafe.com" target="_blank">Asano</a>, a café in New York City. I took a stroll in new york and found a business changing the way we go to cafe's.</p>
+      <p class="work-desc">Personal investment into <a href="https://www.asanocafe.com" target="_blank">Asano</a>, a café in New York City. I took a stroll in New York and found a business changing the way we experience cafés.</p>
     </div>
 
     <div class="work-item">
       <div class="work-header"><span class="work-title">Technology Investment Banker</span><span class="work-tag">Prior</span></div>
       <div class="work-org">Investment Banking — Software, Internet & Gaming</div>
-      <p class="work-desc">I advised technology companies boards across the full transaction spectrum — M&A, leveraged buyouts, IPOs, and capital raises. My work included cross-border deals, public-to-public advisory mandates, and situations requiring deep collaboration with executive leadership on both the buy and sell side.</p>
+      <p class="work-desc">I advised technology company boards across the full transaction spectrum — M&A, leveraged buyouts, IPOs, and capital raises. My work included cross-border deals, public-to-public advisory mandates, and situations requiring deep collaboration with executive leadership on both the buy and sell side.</p>
     </div>
 
     <div class="work-item">
@@ -601,6 +579,7 @@
     <h2 class="section-heading">Contact</h2>
     <p class="section-sub">I'm always open to meeting interesting people and hearing about compelling businesses.</p>
     <div class="contact-row"><span class="contact-label">LinkedIn</span><span class="contact-value"><a href="https://www.linkedin.com/in/chris-s-giron/" target="_blank">chris-s-giron</a></span></div>
+    <div class="contact-row"><span class="contact-label">Substack</span><span class="contact-value"><a href="https://substack.com/@chgi121" target="_blank">chgi121</a></span></div>
     <div class="contact-row"><span class="contact-label">Website</span><span class="contact-value">chris.giron.com</span></div>
     <div class="contact-row"><span class="contact-label">Based in</span><span class="contact-value">New York City</span></div>
   </section>
@@ -609,9 +588,13 @@
   <footer>
     <span>© 2026 Chris Giron</span>
     <div class="footer-links">
-      <a class="linkedin-link" href="https://www.linkedin.com/in/chris-s-giron/" target="_blank">
+      <a class="footer-icon-link" href="https://www.linkedin.com/in/chris-s-giron/" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
+      </a>
+      <a class="footer-icon-link" href="https://substack.com/@chgi121" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        Substack
       </a>
       <span>New York City</span>
     </div>
@@ -620,7 +603,6 @@
 </div>
 
 <script>
-  // ── Navigation ──────────────────────────────────────────────────
   function show(id) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -629,7 +611,6 @@
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  // ── Dark mode ───────────────────────────────────────────────────
   let dark = false;
   const toggleBtn  = document.getElementById('themeToggle');
   const toggleIcon = document.getElementById('toggleIcon');
@@ -641,7 +622,6 @@
     toggleIcon.innerHTML = dark ? moonSVG : sunSVG;
   });
 
-  // ── Photo gallery ───────────────────────────────────────────────
   let photos = [];
   try { photos = JSON.parse(localStorage.getItem('cg_photos') || '[]'); } catch(e) {}
   let lbIndex = 0;
